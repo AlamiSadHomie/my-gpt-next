@@ -6,10 +6,10 @@ import MessageBubble from './components/MessageBubble'
 import ModelSelector from './components/ModelSelector'
 
 const MODELS = [
-  { id: 'llama-3.1-8b-instant',    name: 'LLaMA 3.1 · 8B (Fast)'   },
-  { id: 'llama-3.3-70b-versatile', name: 'LLaMA 3.3 · 70B (Smart)'  },
-  { id: 'qwen-qwq-32b',            name: 'Qwen QwQ · 32B'           },
-  { id: 'mistral-saba-24b',        name: 'Mistral · 24B'            },
+  { id: 'llama-3.1-8b-instant',    name: 'LLaMA 3.1 · 8B (Fast)'  },
+  { id: 'llama-3.3-70b-versatile', name: 'LLaMA 3.3 · 70B (Smart)' },
+  { id: 'qwen-qwq-32b',            name: 'Qwen QwQ · 32B'          },
+  { id: 'mistral-saba-24b',        name: 'Mistral · 24B'           },
 ]
 
 function newConversation() {
@@ -26,7 +26,7 @@ export default function Home() {
   const [activeId,      setActiveId]      = useState(null)
   const [input,         setInput]         = useState('')
   const [isStreaming,   setIsStreaming]    = useState(false)
-  const [model,         setModel]         = useState('qwen2.5:3b')
+  const [model,         setModel]         = useState('llama-3.1-8b-instant')
   const [isDark,        setIsDark]        = useState(true)
   const [sidebarOpen,   setSidebarOpen]   = useState(true)
 
