@@ -8,8 +8,6 @@ import ModelSelector from './components/ModelSelector'
 const MODELS = [
   { id: 'llama-3.1-8b-instant',    name: 'LLaMA 3.1 · 8B (Fast)'  },
   { id: 'llama-3.3-70b-versatile', name: 'LLaMA 3.3 · 70B (Smart)' },
-  { id: 'qwen-qwq-32b',            name: 'Qwen QwQ · 32B'          },
-  { id: 'mistral-saba-24b',        name: 'Mistral · 24B'           },
 ]
 
 function newConversation() {
