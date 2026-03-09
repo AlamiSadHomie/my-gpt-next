@@ -281,7 +281,7 @@ export default function Home() {
                 <span style={{ color: 'var(--accent)', fontFamily: 'var(--font-mono)' }}>
                   {model}
                 </span>{' '}
-                via Ollama
+                via Groq
               </div>
 
               {/* Starter prompts */}
