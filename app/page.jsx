@@ -146,7 +146,7 @@ export default function Home() {
         const msgs = [...c.messages]
         msgs[msgs.length - 1] = {
           role: 'assistant',
-          content: '❌ Could not connect to Ollama. Make sure it is running (`ollama serve`).',
+          content: '❌ Could not connect to Groq. Check your API key on Vercel.',
         }
         return { ...c, messages: msgs }
       }))
