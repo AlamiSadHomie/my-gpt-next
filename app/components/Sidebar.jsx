@@ -129,7 +129,7 @@ export default function Sidebar({ conversations, activeId, onSelect, onNew, onDe
           fontFamily: 'var(--font-mono)',
           whiteSpace: 'nowrap',
         }}>
-          Powered by Ollama
+          Powered by Groq
         </div>
 
       </div>
