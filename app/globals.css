@@ -1,26 +1,80 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ── Dark theme (default) ── */
+html, html.dark {
+  --bg-primary:    #080810;
+  --bg-secondary:  #0e0e1a;
+  --bg-tertiary:   #13131f;
+  --border:        #1e1e32;
+  --accent:        #7c6af7;
+  --accent-cyan:   #00d4ff;
+  --text-primary:  #e2e2f0;
+  --text-muted:    #8888aa;
+  --text-faint:    #44445a;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ── Light theme ── */
+html.light {
+  --bg-primary:    #f0f0f8;
+  --bg-secondary:  #ffffff;
+  --bg-tertiary:   #e8e8f4;
+  --border:        #d0d0e8;
+  --accent:        #6c5ce7;
+  --accent-cyan:   #0099bb;
+  --text-primary:  #1a1a2e;
+  --text-muted:    #555577;
+  --text-faint:    #aaaacc;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-dm-sans), sans-serif;
+  overflow: hidden;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar        { width: 4px; }
+::-webkit-scrollbar-track  { background: transparent; }
+::-webkit-scrollbar-thumb  { background: var(--border); border-radius: 2px; }
+
+/* Streaming cursor blink */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+.streaming-cursor::after {
+  content: '▋';
+  animation: blink 0.9s infinite;
+  color: var(--accent);
+  margin-left: 1px;
+}
+
+/* Sidebar slide animation */
+.sidebar {
+  transition: width 0.3s ease, min-width 0.3s ease;
+  overflow: hidden;
+}
+
+/* Conversation item hover */
+.conv-item:hover {
+  background: var(--bg-tertiary) !important;
+  border-color: var(--border) !important;
+}
+.conv-item:hover .conv-delete {
+  opacity: 1 !important;
+}
+
+/* Send button hover */
+.send-btn:hover:not(:disabled) {
+  opacity: 0.9;
+  transform: translateY(-1px);
 }
