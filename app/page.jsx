@@ -47,17 +47,13 @@ export default function Home() {
     window.addEventListener('resize', handleResize)
 
     const saved = localStorage.getItem('mygpt-conversations')
-    if (saved) {
-      const convs = JSON.parse(saved)
-      if (convs.length > 0) {
-        setConversations(convs)
-        setActiveId(convs[0].id)
-        return
-      }
-    }
-    const initial = newConversation()
-    setConversations([initial])
-    setActiveId(initial.id)
+    const stored = saved ? JSON.parse(saved) : []
+
+    // Always start with a fresh blank chat on first load
+    const fresh = newConversation()
+    setConversations([fresh, ...stored])
+    setActiveId(fresh.id)
+
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
@@ -71,10 +67,12 @@ export default function Home() {
     document.documentElement.className = dark ? 'dark' : 'light'
   }, [])
 
-  // ── Persist to localStorage ──
+  // ── Persist to localStorage (skip empty drafts) ──
   useEffect(() => {
-    if (conversations.length > 0)
-      localStorage.setItem('mygpt-conversations', JSON.stringify(conversations))
+    if (conversations.length > 0) {
+      const nonEmpty = conversations.filter(c => c.messages.length > 0)
+      localStorage.setItem('mygpt-conversations', JSON.stringify(nonEmpty))
+    }
   }, [conversations])
 
   useEffect(() => {
