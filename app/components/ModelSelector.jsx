@@ -16,7 +16,9 @@ export default function ModelSelector({ model, models, onChange, compact = false
         fontFamily: 'var(--font-mono)',
         outline: 'none',
         transition: 'border-color 0.15s',
-        minWidth: compact ? '120px' : 'auto',
+        minWidth: compact ? '120px' : '140px',
+        width: '100%',
+        maxWidth: compact ? '100%' : '260px',
       }}
     >
       {models.map(m => (

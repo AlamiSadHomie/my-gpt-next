@@ -240,6 +240,8 @@ export default function Home() {
           display:        'flex',
           alignItems:     'center',
           justifyContent: 'space-between',
+          flexWrap:       'wrap',
+          rowGap:         '10px',
           background:     'var(--bg-secondary)',
           gap:            '12px',
           flexShrink:     0,
@@ -269,8 +271,10 @@ export default function Home() {
             </span>
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <ModelSelector model={model} models={MODELS} onChange={setModel} />
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flex: 1, minWidth: 0, justifyContent: 'flex-end', flexWrap: 'wrap' }}>
+            <div style={{ flex: 1, minWidth: '160px', maxWidth: '320px' }}>
+              <ModelSelector model={model} models={MODELS} onChange={setModel} compact={isMobile} />
+            </div>
             <button
               onClick={() => setIsDark(d => !d)}
               style={{
