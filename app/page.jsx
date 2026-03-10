@@ -20,14 +20,16 @@ function newConversation() {
 }
 
 export default function Home() {
+  const initialMobile = typeof window !== 'undefined' ? window.innerWidth < 900 : true
+
   const [conversations, setConversations] = useState([])
   const [activeId,      setActiveId]      = useState(null)
   const [input,         setInput]         = useState('')
   const [isStreaming,   setIsStreaming]    = useState(false)
   const [model,         setModel]         = useState('llama-3.1-8b-instant')
   const [isDark,        setIsDark]        = useState(true)
-  const [sidebarOpen,   setSidebarOpen]   = useState(true)
-  const [isMobile,      setIsMobile]      = useState(false)
+  const [sidebarOpen,   setSidebarOpen]   = useState(!initialMobile)
+  const [isMobile,      setIsMobile]      = useState(initialMobile)
 
   const messagesEndRef = useRef(null)
   const inputRef       = useRef(null)
@@ -38,7 +40,7 @@ export default function Home() {
     const handleResize = () => {
       const mobile = window.innerWidth < 900
       setIsMobile(mobile)
-      if (mobile) setSidebarOpen(false)
+      setSidebarOpen(mobile ? false : true)
     }
 
     handleResize()
@@ -227,6 +229,7 @@ export default function Home() {
         {/* Header */}
         <header style={{
           padding:        '10px 20px',
+          paddingTop:     'calc(10px + env(safe-area-inset-top, 0px))',
           borderBottom:   '1px solid var(--border)',
           display:        'flex',
           alignItems:     'center',
@@ -234,6 +237,9 @@ export default function Home() {
           background:     'var(--bg-secondary)',
           gap:            '12px',
           flexShrink:     0,
+          position:       'sticky',
+          top:            0,
+          zIndex:         2,
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
             {/* Toggle sidebar */}
