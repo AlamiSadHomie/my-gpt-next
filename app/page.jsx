@@ -27,6 +27,7 @@ export default function Home() {
   const [model,         setModel]         = useState('llama-3.1-8b-instant')
   const [isDark,        setIsDark]        = useState(true)
   const [sidebarOpen,   setSidebarOpen]   = useState(true)
+  const [isMobile,      setIsMobile]      = useState(false)
 
   const messagesEndRef = useRef(null)
   const inputRef       = useRef(null)
@@ -34,6 +35,15 @@ export default function Home() {
 
   // ── Load from localStorage on mount ──
   useEffect(() => {
+    const handleResize = () => {
+      const mobile = window.innerWidth < 900
+      setIsMobile(mobile)
+      if (mobile) setSidebarOpen(false)
+    }
+
+    handleResize()
+    window.addEventListener('resize', handleResize)
+
     const saved = localStorage.getItem('mygpt-conversations')
     if (saved) {
       const convs = JSON.parse(saved)
@@ -46,6 +56,7 @@ export default function Home() {
     const initial = newConversation()
     setConversations([initial])
     setActiveId(initial.id)
+    return () => window.removeEventListener('resize', handleResize)
   }, [])
 
   useEffect(() => {
@@ -191,6 +202,7 @@ export default function Home() {
         onNew={handleNewConversation}
         onDelete={handleDeleteConversation}
         isOpen={sidebarOpen}
+        isMobile={isMobile}
         onClose={() => setSidebarOpen(false)}
       />
 
