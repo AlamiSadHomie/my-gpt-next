@@ -4,16 +4,17 @@ import ReactMarkdown from 'react-markdown'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism'
 
-export default function MessageBubble({ message, isStreaming }) {
+export default function MessageBubble({ message, isStreaming, isMobile = false }) {
   const isUser = message.role === 'user'
+  const bubbleMaxWidth = isMobile ? '92%' : '78%'
 
   return (
     <div style={{
       display: 'flex',
       justifyContent: isUser ? 'flex-end' : 'flex-start',
-      padding: '6px 24px',
+      padding: isMobile ? '4px 14px' : '6px 24px',
       width: '100%',
-      maxWidth: '860px',
+      maxWidth: isMobile ? '100%' : '860px',
       margin: '0 auto',
       boxSizing: 'border-box',
     }}>
@@ -21,27 +22,27 @@ export default function MessageBubble({ message, isStreaming }) {
       {/* AI avatar */}
       {!isUser && (
         <div style={{
-          width: '30px',
-          height: '30px',
-          borderRadius: '8px',
-          background: 'linear-gradient(135deg, var(--accent), var(--accent-cyan))',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          fontSize: '13px',
-          marginRight: '10px',
-          flexShrink: 0,
-          marginTop: '4px',
-        }}>
-          ✦
-        </div>
+        width: '30px',
+        height: '30px',
+        borderRadius: '8px',
+        background: 'linear-gradient(135deg, var(--accent), var(--accent-cyan))',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        fontSize: '13px',
+        marginRight: isMobile ? '8px' : '10px',
+        flexShrink: 0,
+        marginTop: '4px',
+      }}>
+        ✦
+      </div>
       )}
 
       {/* Bubble */}
       <div style={{
-        maxWidth: '78%',
-        padding: '12px 16px',
-        borderRadius: isUser ? '16px 16px 4px 16px' : '4px 16px 16px 16px',
+        maxWidth: bubbleMaxWidth,
+        padding: isMobile ? '12px 13px' : '12px 16px',
+        borderRadius: isUser ? '16px 16px 6px 16px' : '6px 16px 16px 16px',
         background: isUser ? 'var(--accent)' : 'var(--bg-secondary)',
         border: isUser ? 'none' : '1px solid var(--border)',
         color: isUser ? '#fff' : 'var(--text-primary)',

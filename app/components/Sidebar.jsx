@@ -1,32 +1,54 @@
 'use client'
 
-export default function Sidebar({ conversations, activeId, onSelect, onNew, onDelete, isOpen }) {
+export default function Sidebar({ conversations, activeId, onSelect, onNew, onDelete, isOpen, isMobile = false, onClose }) {
   return (
     <aside
       className="sidebar"
       style={{
-        width: isOpen ? '260px' : '0',
-        minWidth: isOpen ? '260px' : '0',
+        width: isOpen ? (isMobile ? '82vw' : '260px') : '0',
+        minWidth: isOpen ? (isMobile ? '82vw' : '260px') : '0',
         background: 'var(--bg-secondary)',
-        borderRight: '1px solid var(--border)',
+        borderRight: isMobile ? 'none' : '1px solid var(--border)',
         display: 'flex',
         flexDirection: 'column',
         height: '100vh',
+        position: isMobile ? 'fixed' : 'relative',
+        left: 0,
+        top: 0,
+        zIndex: 10,
+        boxShadow: isMobile && isOpen ? '12px 0 36px rgba(0,0,0,0.35)' : 'none',
       }}
     >
       <div style={{ padding: '20px 16px', display: 'flex', flexDirection: 'column', height: '100%', overflow: 'hidden' }}>
 
         {/* Logo */}
-        <div style={{
-          fontFamily: 'var(--font-outfit)',
-          fontWeight: 800,
-          fontSize: '20px',
-          color: 'var(--accent)',
-          marginBottom: '20px',
-          letterSpacing: '-0.5px',
-          whiteSpace: 'nowrap'
-        }}>
-          ✦ MyGPT
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '8px', marginBottom: '18px' }}>
+          <div style={{
+            fontFamily: 'var(--font-outfit)',
+            fontWeight: 800,
+            fontSize: '20px',
+            color: 'var(--accent)',
+            letterSpacing: '-0.5px',
+            whiteSpace: 'nowrap'
+          }}>
+            ✦ MyGPT
+          </div>
+          {isMobile && (
+            <button
+              onClick={onClose}
+              style={{
+                background: 'var(--bg-tertiary)',
+                border: '1px solid var(--border)',
+                color: 'var(--text-muted)',
+                borderRadius: '10px',
+                padding: '6px 10px',
+                cursor: 'pointer',
+                fontSize: '12px',
+              }}
+            >
+              Close
+            </button>
+          )}
         </div>
 
         {/* New Chat */}
