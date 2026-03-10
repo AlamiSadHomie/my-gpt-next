@@ -194,7 +194,13 @@ export default function Home() {
   }
 
   return (
-    <div style={{ position: 'relative', height: '100vh', overflow: 'hidden', background: 'var(--bg-primary)' }}>
+    <div style={{
+      position: 'relative',
+      height: '100dvh',
+      overflow: 'hidden',
+      background: 'var(--bg-primary)',
+      paddingTop: 'env(safe-area-inset-top, 0px)'
+    }}>
 
       {/* ── Sidebar ── */}
       <Sidebar
