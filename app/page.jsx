@@ -181,7 +181,7 @@ export default function Home() {
   }
 
   return (
-    <div style={{ display: 'flex', height: '100vh', overflow: 'hidden', background: 'var(--bg-primary)' }}>
+    <div style={{ position: 'relative', height: '100vh', overflow: 'hidden', background: 'var(--bg-primary)' }}>
 
       {/* ── Sidebar ── */}
       <Sidebar
@@ -191,10 +191,26 @@ export default function Home() {
         onNew={handleNewConversation}
         onDelete={handleDeleteConversation}
         isOpen={sidebarOpen}
+        onClose={() => setSidebarOpen(false)}
       />
 
+      {/* Backdrop to close drawer */}
+      {sidebarOpen && (
+        <div
+          onClick={() => setSidebarOpen(false)}
+          style={{
+            position: 'fixed',
+            inset: 0,
+            background: 'rgba(0,0,0,0.35)',
+            backdropFilter: 'blur(2px)',
+            zIndex: 5,
+            transition: 'opacity 0.2s ease',
+          }}
+        />
+      )}
+
       {/* ── Main area ── */}
-      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', height: '100%', overflow: 'hidden', position: 'relative', zIndex: 1 }}>
 
         {/* Header */}
         <header style={{

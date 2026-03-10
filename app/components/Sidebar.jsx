@@ -1,22 +1,27 @@
 'use client'
 
 export default function Sidebar({ conversations, activeId, onSelect, onNew, onDelete, isOpen, isMobile = false, onClose }) {
+  const drawerWidth = isMobile ? '82vw' : '280px'
+
   return (
     <aside
       className="sidebar"
       style={{
-        width: isOpen ? (isMobile ? '82vw' : '260px') : '0',
-        minWidth: isOpen ? (isMobile ? '82vw' : '260px') : '0',
+        width: drawerWidth,
+        minWidth: drawerWidth,
         background: 'var(--bg-secondary)',
         borderRight: isMobile ? 'none' : '1px solid var(--border)',
         display: 'flex',
         flexDirection: 'column',
         height: '100vh',
-        position: isMobile ? 'fixed' : 'relative',
+        position: 'fixed',
         left: 0,
         top: 0,
         zIndex: 10,
-        boxShadow: isMobile && isOpen ? '12px 0 36px rgba(0,0,0,0.35)' : 'none',
+        boxShadow: isOpen ? '12px 0 36px rgba(0,0,0,0.35)' : 'none',
+        transform: isOpen ? 'translateX(0)' : 'translateX(-105%)',
+        transition: 'transform 0.25s ease, box-shadow 0.25s ease',
+        pointerEvents: isOpen ? 'auto' : 'none',
       }}
     >
       <div style={{ padding: '20px 16px', display: 'flex', flexDirection: 'column', height: '100%', overflow: 'hidden' }}>
